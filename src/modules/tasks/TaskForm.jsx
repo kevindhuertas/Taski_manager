@@ -15,24 +15,27 @@ function TaskForm() {
   };
 
   return (
-    <div className="flex flex-col ">
-      <form onSubmit={handleSubmit} className="flex">
-        <input
+    <div className="flex flex-col pb-4">
+      <h2 className=" text-white font-medium">Crea una Tarea</h2>
+      <form onSubmit={handleSubmit} className="flex gap-1 flex-col flex-auto ">
+        <input 
+          className=" rounded-md p-1"
           onChange={(e) => {
             setTitle(e.target.value);
           }}
           value={title}
           type="text"
-          placeholder="Escribe la tarea"
+          placeholder="Tarea"
         />
         <textarea
+          className=" rounded-md p-1"
           placeholder="descripcion"
           value={description}
           onChange={(e) => {
             setdescription(e.target.value);
           }}
         ></textarea>
-        <button>Guardar</button>
+        <button className=" bg-blue-400 rounded-md px-2">Guardar</button>
       </form>
     </div>
   );

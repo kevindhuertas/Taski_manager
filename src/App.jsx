@@ -1,14 +1,15 @@
-import TaskList from "./modules/tareas/TaskList";
-import TaskForm from "./modules/tareas/TaskForm";
-
-import { HiCubeTransparent } from "react-icons/hi";
+import HomePageContainer from "./pages/HomePageContainer";
+import AppPageContainer from "./pages/AppPageContainer";
+import history from "./context/history";
+import { Route, Routes, BrowserRouter} from "react-router-dom";
 
 export default function App() {
   return (
-    <div className=" ">
-      <div className="flex justify-center py-6"><HiCubeTransparent color="white" size={50} opacity={0.9} /></div>
-      <TaskForm />
-      <TaskList />
-    </div>
+    <BrowserRouter>
+      <Routes history={history}>
+        <Route path="/app"  exact element={<AppPageContainer />} />
+        <Route path="/"  exact  element={<HomePageContainer />} />
+      </Routes>
+    </BrowserRouter>
   );
 }
