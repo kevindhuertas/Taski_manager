@@ -1,15 +1,17 @@
-import HomePageContainer from "./pages/HomePageContainer";
-import AppPageContainer from "./pages/AppPageContainer";
-import history from "./context/history";
-import { Route, Routes, BrowserRouter} from "react-router-dom";
+import "./index.css"
+import { NavBar } from "./components/shared/NavBar";
+import Layout from "./components/shared/Layout";
 
 export default function App() {
   return (
-    <BrowserRouter>
-      <Routes history={history}>
-        <Route path="/app"  exact element={<AppPageContainer />} />
-        <Route path="/"  exact  element={<HomePageContainer />} />
-      </Routes>
-    </BrowserRouter>
+    <>
+    <NavBar>
+    </NavBar>
+    
+    <Layout>
+    </Layout>
+ 
+    
+    </>
   );
 }
