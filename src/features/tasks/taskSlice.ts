@@ -14,7 +14,7 @@ export const taskSlice = createSlice({
     },
     updateTask: (state, action) => {
       // let foundTask = state.find((e: any) => e.id == action.payload);
-      // console.log(foundTask?.id,action);
+      // console.log(foundTask?.id,actionƒ);
       // foundTask= {
       //   title:"Hello",
       //   description :"ds",

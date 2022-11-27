@@ -1,7 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { proyectsData } from "../../data/proyects";
 
-
 export const proyectSlice = createSlice({
   name: "proyects",
   initialState: proyectsData, //  initialState: [],

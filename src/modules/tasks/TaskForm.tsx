@@ -6,18 +6,17 @@ import { v4 as uuid } from "uuid";
 import { Task } from "../../models/Task";
 import { useParams } from "react-router";
 
-
-const initialFormState :Task = {
-    id: uuid(),
-    proyectId: "",
-    title: "",
-    description: "",
-    priority: "LOW",
-    completed: false,
-  };
+const initialFormState: Task = {
+  id: uuid(),
+  proyectId: "",
+  title: "",
+  description: "",
+  priority: "LOW",
+  completed: false,
+};
 
 function TaskForm() {
-  const proyectId= useParams().id;
+  const proyectId = useParams().id;
   const dispatch = useDispatch();
   // Modal
   const [open, setOpen] = useState(false);
@@ -25,7 +24,10 @@ function TaskForm() {
 
   // Form
   const [priority, setPriority] = useState<"LOW" | "MEDIUM" | "HIGH">("LOW");
-  const [taskForm, setTaskForm] = useState<Task>({...initialFormState, priority : priority});
+  const [taskForm, setTaskForm] = useState<Task>({
+    ...initialFormState,
+    priority: priority,
+  });
 
   const handleChange = (e) => {
     setTaskForm({
@@ -36,20 +38,21 @@ function TaskForm() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if(proyectId){
+    if (proyectId) {
       dispatch(
         addTask({
           ...taskForm,
-          proyectId:proyectId
+          proyectId: proyectId,
         })
-        );
-        setPriority("LOW");
-        setTaskForm({...initialFormState, priority : priority, proyectId:proyectId});
-      }
-   
+      );
+      setPriority("LOW");
+      setTaskForm({
+        ...initialFormState,
+        priority: priority,
+        proyectId: proyectId,
+      });
+    }
   };
-
-  
 
   return (
     <>

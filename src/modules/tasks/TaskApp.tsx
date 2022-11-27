@@ -7,15 +7,15 @@ import { useParams } from "react-router";
 import { useEffect } from "react";
 
 export default function TaskApp() {
-  const proyectId= useParams().id;
+  const proyectId = useParams().id;
   let tasks = [];
-  if(proyectId){
-    tasks = useSelector((state:any) => state.tasks.filter(task => task.proyectId == proyectId))
+  if (proyectId) {
+    tasks = useSelector((state: any) =>
+      state.tasks.filter((task) => task.proyectId == proyectId)
+    );
   }
 
-  useEffect(() => {
-  },[])
-  
+  useEffect(() => {}, []);
 
   return (
     <>

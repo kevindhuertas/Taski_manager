@@ -1,17 +1,7 @@
-import "./index.css"
-import { NavBar } from "./components/shared/NavBar";
+import React from "react";
+import "./index.css";
 import Layout from "./components/shared/Layout";
 
 export default function App() {
-  return (
-    <>
-    <NavBar>
-    </NavBar>
-    
-    <Layout>
-    </Layout>
- 
-    
-    </>
-  );
+  return <Layout />;
 }

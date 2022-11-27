@@ -4,27 +4,17 @@ export default class DataManager {
     this.tableName = tableName;
   }
 
-  public getData():any[]{
+  public getData(): any[] {
     return JSON.parse(localStorage.getItem(this.tableName) ?? "[]");
   }
 
+  public getDataById(id: string) {}
 
-  public getDataById(id:string){
-
-  }
-
-  public saveData(body){
+  public saveData(body) {
     localStorage.setItem(this.tableName, JSON.stringify(body));
   }
 
-  public saveDataById(id:string, body:object){
+  public saveDataById(id: string, body: object) {}
 
-  }
-
-  public deleteData(id:string){
-
-  }
-
-
-
+  public deleteData(id: string) {}
 }

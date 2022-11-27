@@ -5,28 +5,31 @@ import { v4 as uuidv4 } from "uuid";
 
 interface ItaskContext {
   tasks: Task[];
-  createTask: (taskTitle:string, description: string, priority:"LOW"|"MEDIUM"|"HIGH")=>void;
+  createTask: (
+    taskTitle: string,
+    description: string,
+    priority: "LOW" | "MEDIUM" | "HIGH"
+  ) => void;
   deleteTask: any;
   completedTask: any;
 }
 
-const taskContextInitialValue= {
+const taskContextInitialValue = {
   tasks: [],
-  createTask: ()=>{},
-  deleteTask: ()=>{},
-  completedTask: ()=>{},
-}
+  createTask: () => {},
+  deleteTask: () => {},
+  completedTask: () => {},
+};
 
 export const TaskContext = createContext<ItaskContext>(taskContextInitialValue);
 
 export function TaskContextProvider(props) {
   const [tasks, setTasks] = useState<Task[]>([]);
 
-
   //USE EFFECT - DATA
   useEffect(() => {
     let localData = [];
-    localData = JSON.parse(localStorage.getItem("tasks") ?? '[]');
+    localData = JSON.parse(localStorage.getItem("tasks") ?? "[]");
     if (!localStorage.getItem("tasks")) localStorage.setItem("tasks", "[]");
     setTasks(localData);
   }, []);
@@ -36,14 +39,18 @@ export function TaskContextProvider(props) {
   }, [tasks]);
 
   //PUBLIC FUNCTIONS
-  function createTask(taskTitle: string, description: string, priority:"LOW"|"MEDIUM"|"HIGH") {
+  function createTask(
+    taskTitle: string,
+    description: string,
+    priority: "LOW" | "MEDIUM" | "HIGH"
+  ) {
     const newTask: Task = {
       id: uuidv4(),
       proyectId: "",
       title: taskTitle,
       description: description,
       completed: false,
-      priority: priority
+      priority: priority,
     };
     setTasks([...tasks, newTask]);
   }
@@ -52,12 +59,12 @@ export function TaskContextProvider(props) {
     setTasks(tasks.filter((e) => e.id != id));
   }
 
-  function completed(id){
-    let task = tasks.find(e=>e.id == id)
-    if(task){
+  function completed(id) {
+    let task = tasks.find((e) => e.id == id);
+    if (task) {
       task.completed = true;
     }
-    setTasks([...tasks])
+    setTasks([...tasks]);
   }
   //return
   return (
@@ -66,7 +73,7 @@ export function TaskContextProvider(props) {
         tasks: tasks,
         createTask: createTask,
         deleteTask: deleteTask,
-        completedTask: completed
+        completedTask: completed,
       }}
     >
       {props.children}

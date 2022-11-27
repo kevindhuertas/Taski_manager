@@ -4,6 +4,7 @@ import DashboardContainer from "../pages/DashboardContainer";
 import history from "../../context/history";
 import { Route, Routes, BrowserRouter } from "react-router-dom";
 import SideBar from "./SideBar";
+import { NavBar } from "./NavBar";
 
 function Layout({ body }) {
   return (
@@ -13,10 +14,10 @@ function Layout({ body }) {
           <SideBar></SideBar>
         </div>
 
-
         <div className=" mx-auto w-full lg:col-span-3 col-span-4">
+          <NavBar></NavBar>
           <Routes history={history}>
-            <Route path="/" exact element={<DashboardContainer/>} />
+            <Route path="/" exact element={<DashboardContainer />} />
             <Route path="/proyect/:id" element={<HomePageContainer />} />
           </Routes>
         </div>
