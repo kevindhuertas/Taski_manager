@@ -1,14 +1,17 @@
-import { useContext } from 'react';
-import { TaskContext } from '../../context/TaskContext';
 import TaskCard from './TaskCard'
 import {useSelector} from 'react-redux';
+import { useParams } from 'react-router';
 
 
 function TaskList() {
-
   //Get data from task store
-  const tasksState = useSelector(state => state.tasks)
-  console.log("Desde redux", tasksState)
+  const params = useParams()
+  let tasksState = [];
+  if(params){
+    tasksState = useSelector(state => state.tasks.filter(task=> task.proyectId == params.id ))
+  }
+  
+
   
 
 

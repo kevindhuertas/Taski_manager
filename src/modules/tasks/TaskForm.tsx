@@ -4,11 +4,12 @@ import { useDispatch } from "react-redux";
 import { addTask } from "../../features/tasks/taskSlice";
 import { v4 as uuid } from "uuid";
 import { Task } from "../../models/Task";
+import { useParams } from "react-router";
 
 
 const initialFormState :Task = {
     id: uuid(),
-    proyectId: "0debcf9f-f333-43c2-8873-e79b0036fa65",
+    proyectId: "",
     title: "",
     description: "",
     priority: "LOW",
@@ -16,6 +17,7 @@ const initialFormState :Task = {
   };
 
 function TaskForm() {
+  const proyectId= useParams().id;
   const dispatch = useDispatch();
   // Modal
   const [open, setOpen] = useState(false);
@@ -34,14 +36,17 @@ function TaskForm() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(taskForm);
-    dispatch(
-      addTask({
-        ...taskForm,
-      })
-    );
-    setPriority("LOW");
-    setTaskForm({...initialFormState, priority : priority});
+    if(proyectId){
+      dispatch(
+        addTask({
+          ...taskForm,
+          proyectId:proyectId
+        })
+        );
+        setPriority("LOW");
+        setTaskForm({...initialFormState, priority : priority, proyectId:proyectId});
+      }
+   
   };
 
   

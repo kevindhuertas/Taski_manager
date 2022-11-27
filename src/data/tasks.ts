@@ -36,9 +36,9 @@ export const tasksData: Task[]= [
   },
   {
     id: "5105d362-d7a2-4b4a-bfd1-0b9a0f3dceaa",
-    proyectId : "7619b3db-752e-4f8a-a893-1ff3687bd17c",
-    title: "Tarea 5",
-    description: "Mi Tercera Tarea",
+    proyectId : "3b476584-76e9-4503-9e64-714c30285025",
+    title: "Tarea 1 en proyecto 2",
+    description: "Mi primera tarea",
     completed : false,
     priority : "LOW"
   },
