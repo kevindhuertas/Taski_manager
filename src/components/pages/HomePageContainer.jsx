@@ -1,12 +1,4 @@
 import React from "react";
-import Row from "../wrappers/Row";
-import Colums from "../wrappers/Colums";
-import { app1 } from "../../data";
-import AppCard from "../cards/AppCard";
-import { CaptionCard } from "../cards/CaptionCard";
-import Card from "../cards/Card";
-import { IconButton, Button } from "@material-tailwind/react";
-import { AiOutlinePlus } from "react-icons/ai";
 import TaskApp from "../../modules/tasks/TaskApp";
 
 export default function HomePageContainer() {

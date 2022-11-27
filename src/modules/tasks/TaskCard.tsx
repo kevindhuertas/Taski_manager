@@ -1,11 +1,13 @@
-import React, { useContext } from "react";
+import React from "react";
+import { useDispatch } from "react-redux";
 import Card from "../../components/cards/Card";
-import { TaskContext } from "../../context/TaskContext";
+import { deleteTask } from "../../features/tasks/taskSlice";
 import { Task } from "../../models/Task";
 
 
 function TaskCard({task}:{task:Task}) {
-  const { deleteTask } = useContext(TaskContext);
+  const dispatch = useDispatch();
+  
   return (
     <Card className=" transition-all hover:scale-105 ease-out duration-200  text-white p-4 cursor-pointer ">
       <div className="flex justify-between">
@@ -16,7 +18,7 @@ function TaskCard({task}:{task:Task}) {
       </div>
       <span
         className="text-sm text-gray mb-5 cursor-pointer"
-        onClick={() => deleteTask(task.id)}
+        onClick={() => dispatch(deleteTask(task.id))  }
       >
         X
       </span>

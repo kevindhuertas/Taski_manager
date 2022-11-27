@@ -1,25 +1,50 @@
-import React, { useState, useContext, useEffect } from "react";
-import { TaskContext } from "../../context/TaskContext";
+import React, { useState } from "react";
 import { Button, Dialog, Chip } from "@material-tailwind/react";
+import { useDispatch } from "react-redux";
+import { addTask } from "../../features/tasks/taskSlice";
+import { v4 as uuid } from "uuid";
+import { Task } from "../../models/Task";
+
+
+const initialFormState :Task = {
+    id: uuid(),
+    proyectId: "0debcf9f-f333-43c2-8873-e79b0036fa65",
+    title: "",
+    description: "",
+    priority: "LOW",
+    completed: false,
+  };
 
 function TaskForm() {
-  const { createTask } = useContext(TaskContext);
-
+  const dispatch = useDispatch();
   // Modal
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(!open);
 
   // Form
-  const [title, setTitle] = useState("");
-  const [description, setdescription] = useState("");
-  const [priority, setpriority] = useState("LOW");
+  const [priority, setPriority] = useState<"LOW" | "MEDIUM" | "HIGH">("LOW");
+  const [taskForm, setTaskForm] = useState<Task>({...initialFormState, priority : priority});
+
+  const handleChange = (e) => {
+    setTaskForm({
+      ...taskForm,
+      [e.target.name]: e.target.value, //[title]: "value"
+    });
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    createTask(title, description, priority);
-    setTitle("");
-    setdescription("");
+    console.log(taskForm);
+    dispatch(
+      addTask({
+        ...taskForm,
+      })
+    );
+    setPriority("LOW");
+    setTaskForm({...initialFormState, priority : priority});
   };
+
+  
 
   return (
     <>
@@ -29,7 +54,6 @@ function TaskForm() {
         variant="gradient"
         className="flex"
       >
-        {/* <AiOutlinePlus></AiOutlinePlus> */}
         Agregar
       </Button>
       <Dialog open={open} handler={handleOpen} className="rounded-2xl">
@@ -50,42 +74,38 @@ function TaskForm() {
             className="flex gap-1 flex-col flex-auto "
           >
             <input
+              name="title"
               className=" rounded-md p-1"
-              onChange={(e) => {
-                setTitle(e.target.value);
-              }}
-              value={title}
+              onChange={handleChange}
               type="text"
               placeholder="Tarea"
             />
             <textarea
+              name="description"
               className=" rounded-md p-1"
               placeholder="descripcion"
-              value={description}
-              onChange={(e) => {
-                setdescription(e.target.value);
-              }}
+              onChange={handleChange}
             ></textarea>
 
             <div className="flex gap-2 items-center py-2">
               Prioridad:
               <Chip
                 onTap={() => {
-                  setpriority("HIGH");
+                  setPriority("HIGH");
                 }}
                 color={priority == "HIGH" ? "red" : "gray"}
                 value="Alto"
               />
               <Chip
                 onTap={() => {
-                  setpriority("MEDIUM");
+                  setPriority("MEDIUM");
                 }}
                 color={priority == "MEDIUM" ? "blue" : "gray"}
                 value="Medio"
               />
               <Chip
                 onTap={() => {
-                  setpriority("LOW");
+                  setPriority("LOW");
                 }}
                 color={priority == "LOW" ? "amber" : "gray"}
                 value="Bajo"

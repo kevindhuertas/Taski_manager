@@ -46,6 +46,7 @@ export function TaskContextProvider(props) {
   function createProject(title: string, description: string) {
     const newProject: Project = {
       id: uuidv4(),
+      creatorUser: "ce3f2298-3e50-4acc-9f40-0579be383116",
       title: title,
       description: description,
       favorite: false,
