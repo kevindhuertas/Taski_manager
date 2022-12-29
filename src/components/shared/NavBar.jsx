@@ -64,16 +64,16 @@ export const NavBar = () => {
   );
 
   return(
-    <Navbar className="mx-auto max-w-screen-xl py-2 px-4 lg:px-8 lg:py-4">
-      <div className="container mx-auto flex items-center justify-between text-blue-gray-900">
-        <Typography
+    <Navbar className="py-2 px-4 lg:px-8 lg:py-4 rounded-2xl mb-4 border box-container-shadow bg-opacity-100 w-full max-w-none">
+      <div className="= mx-auto flex items-center justify-between text-blue-gray-900">
+        {/* <Typography
           as="a"
           href="#"
           variant="small"
           className="mr-4 cursor-pointer py-1.5 font-normal"
         >
           <span>Material Tailwind</span>
-        </Typography>
+        </Typography> */}
         <div className="hidden lg:block">{navList}</div>
         <Button variant="gradient" size="sm" className="hidden lg:inline-block">
           <span>Buy Now</span>

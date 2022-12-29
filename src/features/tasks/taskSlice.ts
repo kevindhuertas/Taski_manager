@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { useParams } from "react-router";
 import { tasksData } from "../../data/tasks";
+import { Task } from "../../models/Task";
 
 export const taskSlice = createSlice({
   name: "tasks",
@@ -30,11 +30,19 @@ export const taskSlice = createSlice({
         state.splice(taskIndex, 1);
       }
     },
+    completeTask: (state, action) => {
+      const taskIndex: any = state.findIndex(
+        (e: any) => e.id == action.payload
+      );
+      if (taskIndex !== -1) {
+        state[taskIndex].completed = !state[taskIndex].completed;
+      }
+    },
   },
 });
 
 //exportar funciones
-export const { addTask, deleteTask } = taskSlice.actions;
+export const { addTask, deleteTask, completeTask } = taskSlice.actions;
 
 //Llamamos el reducer en el store
 export default taskSlice.reducer;

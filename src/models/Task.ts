@@ -6,5 +6,5 @@ export interface Task {
   description: string;
 
   completed: boolean;
-  priority: "HIGH" | "MEDIUM" | "LOW";
+  priority: "HIGH" | "MEDIUM" | "LOW" | undefined;
 }

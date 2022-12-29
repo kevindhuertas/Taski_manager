@@ -5,6 +5,9 @@ import { addTask } from "../../features/tasks/taskSlice";
 import { v4 as uuid } from "uuid";
 import { Task } from "../../models/Task";
 import { useParams } from "react-router";
+import { MdOutlineClose } from "react-icons/md";
+import { HiPlusCircle } from "react-icons/hi";
+
 
 const initialFormState: Task = {
   id: uuid(),
@@ -23,7 +26,7 @@ function TaskForm() {
   const handleOpen = () => setOpen(!open);
 
   // Form
-  const [priority, setPriority] = useState<"LOW" | "MEDIUM" | "HIGH">("LOW");
+  const [priority, setPriority] = useState<"LOW" | "MEDIUM" | "HIGH"| undefined>(undefined);
   const [taskForm, setTaskForm] = useState<Task>({
     ...initialFormState,
     priority: priority,
@@ -45,7 +48,7 @@ function TaskForm() {
           proyectId: proyectId,
         })
       );
-      setPriority("LOW");
+      setPriority(undefined);
       setTaskForm({
         ...initialFormState,
         priority: priority,
@@ -56,25 +59,13 @@ function TaskForm() {
 
   return (
     <>
-      <Button
-        ripple={false}
-        onClick={handleOpen}
-        variant="gradient"
-        className="flex"
-      >
-        Agregar
-      </Button>
-      <Dialog open={open} handler={handleOpen} className="rounded-2xl">
+      <HiPlusCircle onClick={handleOpen} className="inline text-blue-400 hover:text-gray-700" size={25}/>
+      <Dialog size={"xl"} open={open} handler={handleOpen} className="rounded-2xl">
         <div className="flex flex-col p-4">
-          <div className="flex justify-between">
-            <h2 className="title text-primary-900 py-2">Crea una Tarea</h2>
-            <Button
-              onClick={handleOpen}
-              className="text-primary-900"
-              variant="text"
-            >
-              X
-            </Button>
+          <div className="flex justify-between items-center text-primary-900">
+            <span className="sub-title py-2">Crea una Tarea</span>
+   
+            <MdOutlineClose   onClick={handleOpen} className=""/>
           </div>
 
           <form
@@ -95,8 +86,9 @@ function TaskForm() {
               onChange={handleChange}
             ></textarea>
 
-            <div className="flex gap-2 items-center py-2">
+            <div className="flex flex-wrap gap-1  py-2 ">
               Prioridad:
+              <div className="flex gap-0.5">
               <Chip
                 onTap={() => {
                   setPriority("HIGH");
@@ -108,16 +100,17 @@ function TaskForm() {
                 onTap={() => {
                   setPriority("MEDIUM");
                 }}
-                color={priority == "MEDIUM" ? "blue" : "gray"}
+                color={priority == "MEDIUM" ? "amber" : "gray"}
                 value="Medio"
               />
               <Chip
                 onTap={() => {
                   setPriority("LOW");
                 }}
-                color={priority == "LOW" ? "amber" : "gray"}
+                color={priority == "LOW" ? "blue" : "gray"}
                 value="Bajo"
               />
+              </div>
             </div>
             <div className="flex">
               <Button

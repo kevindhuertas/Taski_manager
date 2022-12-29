@@ -9,16 +9,17 @@ import { NavBar } from "./NavBar";
 function Layout({ body }) {
   return (
     <BrowserRouter>
-      <div className="mx-auto max-w-screen-xl  grid grid-cols-4 pt-4 gap-4">
-        <div className=" bg-white rounded-2xl hidden lg:inline  min-w-full ">
+      <div className=" w-full min-h-screen max-h-screen bg-deep-orange-900 flex grid-cols-3 p-2 lg:p-3 lg:grid-cols-5 gap-4   overflow-hidden">
+
+        <div className=" bg-white rounded-3xl hidden lg:inline  box-container-shadow flex-auto">
           <SideBar></SideBar>
         </div>
 
-        <div className=" mx-auto w-full lg:col-span-3 col-span-4">
-          <NavBar></NavBar>
+        <div className="flex mx-auto flex-auto bg-blue-gray-600 w-full lg:col-span-4 col-span-4">
+          {/* <NavBar></NavBar> */}
           <Routes history={history}>
             <Route path="/" exact element={<DashboardContainer />} />
-            <Route path="/proyect/:id" element={<HomePageContainer />} />
+            <Route  path="/proyect/:id" element={<HomePageContainer />} />
           </Routes>
         </div>
       </div>
