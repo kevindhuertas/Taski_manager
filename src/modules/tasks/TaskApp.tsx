@@ -3,7 +3,7 @@ import TaskList from "./TaskList.jsx";
 import TaskForm from "./TaskForm";
 import { IconButton, Button } from "@material-tailwind/react";
 import { useDispatch, useSelector } from "react-redux";
-import { useParams } from "react-router";
+import { useNavigate, useParams } from "react-router";
 import { useEffect } from "react";
 import { Project } from "../../models/Projects.js";
 import { HiDotsHorizontal } from "react-icons/hi";
@@ -15,6 +15,7 @@ import {
   MenuItem,
 } from "@material-tailwind/react";
 import { deleteProyect } from "../../features/proyect/proyectSlice.js";
+import { deleteAllTaskFromProyectId } from "../../features/tasks/taskSlice.js";
 
 export default function TaskApp() {
   const dispatch = useDispatch();
@@ -31,6 +32,13 @@ export default function TaskApp() {
         state.proyects.filter((proyect) => proyect.id == proyectId)[0]
     );
     dataLoaded = true;
+  }
+  const navigate = useNavigate();
+  const deleteProjecthandler=()=>{
+    dispatch(deleteProyect(proyectId));
+    console.log("xde")
+    navigate("/projects");
+    dispatch(deleteAllTaskFromProyectId(proyectId))
   }
 
   useEffect(() => {}, []);
@@ -49,7 +57,7 @@ export default function TaskApp() {
                   </div>
                 </MenuHandler>
                 <MenuList>
-                  <MenuItem onClick={() => dispatch(deleteProyect(proyectId))}>
+                  <MenuItem onClick={() => deleteProjecthandler()}>
                     Borrar
                   </MenuItem>
                 </MenuList>

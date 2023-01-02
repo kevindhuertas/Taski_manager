@@ -15,7 +15,7 @@ export default function DashboardContainer() {
   const [valueCalendar, valueCalendarChange] = useState(new Date());
   let proyectCount = useSelector((state: UseSelectorTypes) => state.proyects.length);
   let projects: Project[] = useSelector((state:UseSelectorTypes)=> state.proyects);
-  let lastTasks: Task[] = useSelector((state: UseSelectorTypes) => state.tasks).slice(0,5);
+  let lastTasks: Task[] = useSelector((state: UseSelectorTypes) => state.tasks);
   let taskCompletedCount = useSelector((state: UseSelectorTypes) => state.tasks.filter((t) => t.completed == true).length);
   let taskIncompletedCount = useSelector((state: UseSelectorTypes) => state.tasks.filter(
     (t) => t.completed == false
@@ -69,7 +69,12 @@ export default function DashboardContainer() {
   const lastTasksList = (
     <div className="w-full  ">
       <div className="flex flex-col gap-2 ">
-        {lastTasks.map((task) => (
+        {lastTasks.length === 0 && (
+          <div className="flex justify-center font-semibold text-gray-500">
+            No hay tareass
+            </div>
+        )}
+        {lastTasks.slice(0,5).map((task) => (
           <TaskCard task={task} key={task.id} />
         ))}
       </div>
@@ -114,7 +119,7 @@ export default function DashboardContainer() {
             <div className="flex-1 grid grid-cols-1 lg:grid-cols-3 w-full lg:overflow-auto gap-2">
               <div className=" col-span-2 flex flex-1 flex-col overflow-auto">
                 <div className=" grid grid-cols-1 md:grid-cols-3 gap-2">{resumeCrads}</div>
-                <span className="font-semibold text-gray-600 text-lg pt-4">
+                <span className="font-semibold text-gray-700 text-lg pt-4">
                   Últimas Tareas
                 </span>
                 <div className="flex flex-1 lg:overflow-auto">{lastTasksList}</div>

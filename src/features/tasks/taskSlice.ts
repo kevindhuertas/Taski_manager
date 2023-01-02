@@ -4,12 +4,15 @@ import { Task } from "../../models/Task";
 
 export const taskSlice = createSlice({
   name: "tasks",
-  initialState: tasksData, //  initialState: [],
+  initialState: localStorage.getItem("tasks")? JSON.parse(localStorage.getItem("tasks")):[], //  initialState: [],
   reducers: {
     addTask: (state, action) => {
       //State es nuestro valio inicial
       // Action es lo que mandamos en el parametro
+      // localStorage.setItem("tasks", JSON.stringify(tasks));
       state.push(action.payload); //Esta permitido pero no lo mejor
+      localStorage.setItem("tasks", JSON.stringify(state.map((e)=>e)));
+
       // [...state, action.payload];
     },
     updateTask: (state, action) => {
@@ -29,6 +32,7 @@ export const taskSlice = createSlice({
       if (taskIndex !== -1) {
         state.splice(taskIndex, 1);
       }
+      localStorage.setItem("tasks", JSON.stringify(state.map((e)=>e)));
     },
     completeTask: (state, action) => {
       const taskIndex: any = state.findIndex(
@@ -37,12 +41,17 @@ export const taskSlice = createSlice({
       if (taskIndex !== -1) {
         state[taskIndex].completed = !state[taskIndex].completed;
       }
+      localStorage.setItem("tasks", JSON.stringify(state.map((e)=>e)));
+    },
+    deleteAllTaskFromProyectId:  (state, action) => {
+      state = state.filter((el:Task) =>el.proyectId != action.payload)
+      localStorage.setItem("tasks", JSON.stringify(state.map((e)=>e)));
     },
   },
 });
 
 //exportar funciones
-export const { addTask, deleteTask, completeTask } = taskSlice.actions;
+export const { addTask, deleteTask, completeTask, deleteAllTaskFromProyectId} = taskSlice.actions;
 
 //Llamamos el reducer en el store
 export default taskSlice.reducer;
