@@ -2,19 +2,20 @@ import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useLocation } from "react-router-dom";
 import logo from "../../assets/logo_fondo_blanco.png";
-import { HiPlusCircle } from "react-icons/hi";
+import { RiHomeLine } from "react-icons/ri";
 import ProjectForm from "../../modules/projects/proyectForm";
+import { appIconSize } from "../../style/constans";
+import { HiOutlineClipboardList } from "react-icons/hi";
 
 export default function SideBar() {
   const location = useLocation();
   const { pathname } = location;
   const splitLocation = pathname.split("/");
   const proyects = useSelector((state) => state.proyects);
-  console.log(splitLocation);
 
   const classNameLinks =
     "flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group";
-  const activeClassName = "text-white hover:bg-gray-200 bg-gray-100";
+  const activeClassName = "text-white hover:bg-gray-200 bg-gray-100 shadow-lg shadow-gray-200/50";
   const proyectColorClasName = [
     " bg-light-green-400 ",
     " bg-deep-orange-400 ",
@@ -24,13 +25,13 @@ export default function SideBar() {
   ];
 
   return (
-    <aside className=" h-full min-h-full max-h-full" aria-label="Sidebar">
-      <div className="overflow-y-auto py-4 px-3  rounded dark:bg-gray-800">
+    <aside className="p-2 lg:p-4 lg:px-4 lg:pr-0 h-full " aria-label="Sidebar">
+      <div className="bg-white rounded-3xl flex-1  h-full overflow-y-auto p-4 pt-5 dark:bg-gray-800">
         <ul className="space-y-2">
           <li className="">
-            <Link>
+            <Link to="/">
               {/* <img src={logo} alt="logo" className="p-2 pt3 w-3/5 mb-8" /> */}
-              <h1 className="p-2 w-3/5 mb-8 font-extrabold text-2xl text-gray-700">.TASKI</h1>
+              <span className="w-3/5 mb-8 font-extrabold text-2xl text-gray-700 pl-2">.TASKI</span>
             </Link>
           </li>
           <li>
@@ -42,24 +43,25 @@ export default function SideBar() {
                 splitLocation[1] === "" ? activeClassName : "",
               ]}
             >
-              <svg
-                aria-hidden="true"
-                className="w-6 h-6 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
-                fill="currentColor"
-                viewBox="0 0 20 20"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path d="M2 10a8 8 0 018-8v8h8a8 8 0 11-16 0z"></path>
-                <path d="M12 2.252A8.014 8.014 0 0117.748 8H12V2.252z"></path>
-              </svg>
+              <RiHomeLine size={appIconSize.medium}></RiHomeLine>
               <span className="ml-3">Dashboard</span>
+            </Link>
+            <Link
+              to="/projects"
+              className={[
+                classNameLinks,
+                splitLocation[1] === "projects" && !splitLocation[2]  ? activeClassName : "",
+              ]}
+            >
+              <HiOutlineClipboardList size={appIconSize.medium}></HiOutlineClipboardList>
+              <span className="ml-3">Proyectos</span>
             </Link>
           </li>
         </ul>
         <ul className="pt-4 mt-4 space-y-2  dark:border-gray-700 border-t ">
           <span className="flex items-center pl-2.5 mb-4 mt-2 w-full">
-            <span className="flex justify-between text-xl font-semibold  dark:text-white">
-              <span>Proyectos</span>
+            <span className="flex justify-between text-xl font-semibold  dark:text-white  w-full">
+              <a href="/projects">Proyectos</a>
               <span>
               <ProjectForm/>
               </span>
@@ -69,7 +71,7 @@ export default function SideBar() {
             {proyects.map((proyect, index) => {
               return (
                 <Link
-                  to={`/proyect/${proyect.id}`}
+                  to={`/projects/${proyect.id}`}
                   key={proyect.id}
                   className={[
                     classNameLinks,

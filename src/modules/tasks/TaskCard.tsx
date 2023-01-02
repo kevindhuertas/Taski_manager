@@ -6,7 +6,8 @@ import { completeTask, deleteTask } from "../../features/tasks/taskSlice";
 import { Task } from "../../models/Task";
 import { BiCheckCircle } from "react-icons/bi";
 import { HiDotsHorizontal } from "react-icons/hi";
-import { FiMoreHorizontal } from "react-icons/fi";
+import { IoEllipseOutline } from "react-icons/io5";
+import { IoCheckmarkCircleSharp } from "react-icons/io5";
 import {
   Menu,
   MenuHandler,
@@ -14,6 +15,7 @@ import {
   MenuItem,
   Button,
 } from "@material-tailwind/react";
+import { appIconSize } from "../../style/constans";
 
 function TaskCard({ task }: { task: Task }) {
   const dispatch = useDispatch();
@@ -22,11 +24,21 @@ function TaskCard({ task }: { task: Task }) {
     <Card className=" transition-all ease-out duration-200   p-4 cursor-pointer ">
       <div className="flex justify-between items-center p-0 mb-1 text-gray-700">
         <span className="font-bold flex gap-2 items-center">
-          <BiCheckCircle
-            className={task.completed ? "text-green-400" : "text-gray-500"}
-            size={20}
+          { task.completed ?
+            <IoCheckmarkCircleSharp
+            className={"text-green-400"}
+            size={appIconSize.medium}
             onClick={() => dispatch(completeTask(task.id))}
           />
+          :
+          <IoEllipseOutline
+            className={" text-gray-500"}
+            size={appIconSize.medium}
+            onClick={() => dispatch(completeTask(task.id))}
+          />
+
+          }
+          
           <span className={task.completed ? "line-through text-gray-500" : ""}>
             {task.title}
           </span>
@@ -53,7 +65,7 @@ function TaskCard({ task }: { task: Task }) {
         <Chip className="" color="red" value="Alto"></Chip>
       )}
       {task.priority === "MEDIUM" && (
-        <Chip className="text-sm" color="amber" value="Medio"></Chip>
+        <Chip  color="amber" value="Medio"></Chip>
       )}
       {task.priority === "LOW" && <Chip color="blue" value="Bajo"></Chip>}
 

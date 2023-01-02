@@ -39,7 +39,7 @@ export default function TaskApp() {
     <>
       {dataLoaded ? (
         <div className=" flex flex-col h-full">
-          <div className="flex flex-col pb-4  px-5  ">
+          <div className="flex flex-col pb-4  px-4  ">
             <span className="font-semibold text-2xl flex justify-between">
               <span>{proyect.title}</span>
               <Menu>
@@ -107,7 +107,7 @@ export default function TaskApp() {
             </div>
           </div>
 
-          <div className="h-full px-5 py-4 bg-white rounded-3xl box-container-shadow  ">
+          <div className="h-full px-4 py-4 bg-white rounded-3xl box-container-shadow  ">
             <div className="flex justify-between items-center pb-2 ">
               <span className="self-center text-xl font-semibold whitespace-nowrap dark:text-white ">
                 Tareas

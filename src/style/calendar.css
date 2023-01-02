@@ -2,7 +2,7 @@
   width: 350px;
   max-width: 100%;
   text-decoration: none !important;
-  @apply bg-white border border-gray-100 rounded-2xl p-2;
+  @apply bg-white border border-gray-100 rounded-2xl p-2 w-full;
 }
 .react-calendar--doubleView {
   width: 700px;

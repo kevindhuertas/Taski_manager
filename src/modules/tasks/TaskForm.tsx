@@ -45,13 +45,15 @@ function TaskForm() {
       dispatch(
         addTask({
           ...taskForm,
+          priority: priority,
           proyectId: proyectId,
         })
       );
       setPriority(undefined);
       setTaskForm({
         ...initialFormState,
-        priority: priority,
+        id: uuid(),
+        priority: undefined,
         proyectId: proyectId,
       });
     }

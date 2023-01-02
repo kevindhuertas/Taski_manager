@@ -1,11 +1,12 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Button, Dialog, Chip } from "@material-tailwind/react";
 import { useDispatch } from "react-redux";
 import { v4 as uuid } from "uuid";
 import { MdOutlineClose } from "react-icons/md";
-import { HiPlusCircle } from "react-icons/hi";
+import { RiAddCircleLine } from "react-icons/ri";
 import { Project } from "../../models/Projects";
 import { addProyect } from "../../features/proyect/proyectSlice";
+import { appIconSize } from "../../style/constans";
 
 
 const initialFormState: Project = {
@@ -28,6 +29,7 @@ function ProjectForm() {
     ...initialFormState
   });
 
+
   const handleChange = (e) => {
     setProjectForm({
       ...projectForm,
@@ -41,19 +43,20 @@ function ProjectForm() {
         addProyect({ ...projectForm,})
       );
       setProjectForm({
-        ...initialFormState
+        ...initialFormState,
+        id: uuid(),
       });
   };
 
   return (
     <>
-      <HiPlusCircle onClick={handleOpen} className=" ml-2 inline text-gray-400/80 hover:text-gray-700" size={25}/>
+      <RiAddCircleLine onClick={handleOpen} className=" ml-2 inline opacity hover:text-blue-700" size={appIconSize.medium}/>
       <Dialog size={"xl"} open={open} handler={handleOpen} className="rounded-2xl">
         <div className="flex flex-col p-4">
           <div className="flex justify-between items-center text-primary-900">
             <span className="sub-title py-2">Crear un nuevo proyecto</span>
    
-            <MdOutlineClose   onClick={handleOpen} className=""/>
+            <MdOutlineClose   onClick={handleOpen}/>
           </div>
 
           <form
